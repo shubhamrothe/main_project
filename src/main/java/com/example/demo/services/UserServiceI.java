@@ -13,7 +13,7 @@ public interface UserServiceI {
     User updateUserById(User user, Long userId);
 
     // Get User
-    User getUserById(Long userId);
+    User getUserById(Long userId) throws Exception;
 
     //Get all users
     List<User> getAllUsers();
