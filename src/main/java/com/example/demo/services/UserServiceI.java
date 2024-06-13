@@ -6,18 +6,21 @@ import java.util.List;
 
 public interface UserServiceI {
 
-    //To create user
+    //To Create User
     User createUser(User user);
 
-    //To update user by Id
+    //To Update User By Id
     User updateUserById(User user, Long userId);
 
-    // Get User
+    // Get User By Id
     User getUserById(Long userId) throws Exception;
 
-    //Get all users
+    //Get All Users
     List<User> getAllUsers();
 
-    //Delete user by Id
+    //Delete User By Id
     void deleteUserById(Long userId);
+
+    //Delete All Users
+    void deleteAllUsers();
 }
