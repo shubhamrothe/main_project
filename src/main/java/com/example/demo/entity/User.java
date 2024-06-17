@@ -17,6 +17,9 @@ public class User {
     @Column(name="user_info")
     public String about;
 
+    public User() {
+    }
+
     public User(Long userId, String userName, String userAge, String about) {
         this.userId = userId;
         this.userName = userName;
