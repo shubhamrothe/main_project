@@ -1,7 +1,18 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -20,6 +31,7 @@ public class User {
     public String userName;
     @Column(name="user_age")
     public String userAge;
+    
     @Column(name="user_info")
     public String about;
 

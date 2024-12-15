@@ -1,10 +1,10 @@
 package com.example.demo.payload;
 
-public class ApiResponse {
+public class CustomApiResponse {
     private String message;
     private boolean status;
 
-    public ApiResponse(String message, boolean status) {
+    public CustomApiResponse(String message, boolean status) {
         this.message = message;
         this.status = status;
     }
