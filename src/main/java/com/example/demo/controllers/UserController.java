@@ -38,6 +38,7 @@ public class UserController {
 	@Autowired
 	private UserServiceI userServiceI;
 
+	//CREATE
 	@Operation(summary = "Create a new user", description = "Adds a new user to the database and returns the created user")
 	@ApiResponses({
 			@ApiResponse(responseCode = "201", description = "User created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
@@ -54,40 +55,59 @@ public class UserController {
 		return ResponseEntity.ok(userServiceI.createUser(user));
 	}
 
+	//UPDATE
+	@Operation(
+	        summary = "Update a user",
+	        description = "Updates an existing user by their unique ID"
+	    )
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "User updated successfully", 
+	                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
+	        @ApiResponse(responseCode = "404", description = "User not found", content = @Content)})
+@PutMapping("/{userId}")
+public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long userId) {
+	log.info("Requesting to update single user with userId {}:", userId);
+	User updatedUser = userServiceI.updateUserById(user, userId);
+	log.info("completed the request to update single user with userId {}:", userId);
+	return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
+}
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        log.info("Requesting to get all users");
-        List<User> allUsers = userServiceI.getAllUsers();
-        log.info("Completed the request to get all users");
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
-    }
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getSingleUser(@PathVariable Long userId) throws Exception {
-        log.info("Requesting to get single user with userId {}:",userId);
-        User user = userServiceI.getUserById(userId);
-        log.info("completed the request to get single user with userId {}:",userId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long userId) {
-        log.info("Requesting to update single user with userId {}:",userId);
-        User updatedUser = userServiceI.updateUserById(user, userId);
-        log.info("completed the request to update single user with userId {}:",userId);
-        return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<CustomApiResponse> deleteUser(@PathVariable Long userId) {
-        log.info("Requesting to delete single user with userId {}:",userId);
-        userServiceI.deleteUserById(userId);
-        log.info("completed the request to delete single user with userId {}:",userId);
-        return ResponseEntity.status(HttpStatus.OK)
-				.body(new CustomApiResponse("User is deleted successfully !!", true));                           
-    }
-
+	//DELETE
+	 @Operation(
+		        summary = "Delete a user by ID",
+		        description = "Deletes a user by their unique ID"
+		    )
+		    @ApiResponses({
+		        @ApiResponse(responseCode = "200", description = "User deleted successfully", 
+		                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
+		        @ApiResponse(responseCode = "404", description = "User not found", content = @Content)
+		    })
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<CustomApiResponse> deleteUser(@PathVariable Long userId) {
+		log.info("Requesting to delete single user with userId {}:", userId);
+		userServiceI.deleteUserById(userId);
+		log.info("completed the request to delete single user with userId {}:", userId);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new CustomApiResponse("User is deleted successfully !!", true));
+	}
+	 
+	 
+	 //GET BY ID
+	 
+	 @Operation( summary = "Get a user by ID", description = "Fetches a user by their unique ID" )
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "User fetched successfully", 
+	                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
+	        @ApiResponse(responseCode = "404", description = "User not found", content = @Content) })
+@GetMapping("/{userId}")
+public ResponseEntity<User> getSingleUser(@PathVariable Long userId) throws Exception {
+	log.info("Requesting to get single user with userId {}:", userId);
+	User user = userServiceI.getUserById(userId);
+	log.info("completed the request to get single user with userId {}:", userId);
+	return new ResponseEntity<>(user, HttpStatus.OK);
+}
+	 
+	 //DELETE ALL
 	 
 	 @Operation(
 		        summary = "Delete all users",
@@ -104,5 +124,37 @@ public class UserController {
 		log.info("completed the request to delete all users");
 		return ResponseEntity.ok().body(new CustomApiResponse("Users deleted successfully!!", true));
 	}
+	 
+	 
+	 //GET ALL
+	 @Operation(
+		        summary = "Get all users",
+		        description = "Fetches all users from the database"
+		    )
+		    @ApiResponses({
+		        @ApiResponse(responseCode = "200", description = "Users fetched successfully", 
+		                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
+		        @ApiResponse(responseCode = "404", description = "No users found", content = @Content)
+		    })
+	@GetMapping
+	public ResponseEntity<List<User>> getAllUsers() {
+		log.info("Requesting to get all users");
+		List<User> allUsers = userServiceI.getAllUsers();
+		log.info("Completed the request to get all users");
+		return new ResponseEntity<>(allUsers, HttpStatus.OK);
+	
+	 }
+	
+	
 
+    
+
+	 
+	
+	 
+	
+
+	
 }
+	 
+
