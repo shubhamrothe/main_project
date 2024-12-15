@@ -44,15 +44,10 @@ public class UserController {
 			@ApiResponse(responseCode = "400", description = "Invalid input", content = @Content) })
 	@PostMapping
 	public ResponseEntity<User> createUser(@RequestBody User user) {
-		// log.info("Requesting to create a user");
 		logger.info("Requesting to create a user");
-//          User user1= userServiceI.createUser(user);
-//           return new ResponseEntity<>(user1, HttpStatus.CREATED);//201
-//Or
 		logger.info("Completed the request to create a user");
 		return ResponseEntity.ok(userServiceI.createUser(user));
 	}
-
 	
 	 @Operation(
 		        summary = "Get all users",
@@ -70,7 +65,6 @@ public class UserController {
 		logger.info("Completed the request to get all users");
 		return new ResponseEntity<>(allUsers, HttpStatus.OK);
 	}
-
 	 
 	 @Operation(
 		        summary = "Get a user by ID",
@@ -88,7 +82,6 @@ public class UserController {
 		logger.info("completed the request to get single user with userId {}:", userId);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-
 	 
 	 @Operation(
 		        summary = "Update a user",
@@ -106,8 +99,7 @@ public class UserController {
 		logger.info("completed the request to update single user with userId {}:", userId);
 		return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
 	}
-	 
-	 
+	 	 
 	 @Operation(
 		        summary = "Delete a user by ID",
 		        description = "Deletes a user by their unique ID"
@@ -125,8 +117,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new CustomApiResponse("User is deleted successfully !!", true));
 	}
-
-	 
+ 
 	 @Operation(
 		        summary = "Delete all users",
 		        description = "Deletes all users from the database"
