@@ -1,15 +1,15 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.entity.User;
-import com.example.demo.repositories.UserRepositoryI;
-import com.example.demo.services.UserServiceI;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.demo.entity.User;
+import com.example.demo.repositories.UserRepositoryI;
+import com.example.demo.services.UserServiceI;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
